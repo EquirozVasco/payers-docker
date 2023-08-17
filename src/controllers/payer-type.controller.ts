@@ -3,33 +3,20 @@ import { PayerType } from "../models/payer-type.model"
 
 export const createPayerType = async (req: Request, res: Response) => {
     try {
-        const payer = new Payer;
-        payer.code = req.body.code;
-        payer.name = req.body.name;
-        payer.email = req.body.email;
+        const payerType = new PayerType;
+        payerType.code = req.body.code;
+        payerType.name = req.body.name;
 
         if (
-            !payer.code ||
-            !payer.name ||
-            !payer.email ||
-            !payer.paymentResponsibleType
+            !payerType.code ||
+            !payerType.name
         ) {
-            throw new Error ('All payer fields must be filled');
+            throw new Error ('All payerType fields must be filled');
         }
 
-        const paymentResponsibleTypeId = req.body.paymentResponsibleTypeId;
+        await payerType.save();
 
-        if (paymentResponsibleTypeId) {
-            const payerType = await payerTypeRepository.findOne(paymentResponsibleTypeId);
-            if (!payerType) {
-                throw new Error("Invalid paymentResponsibleTypeId");
-            }
-            payer.paymentResponsibleType = payerType;
-        }
-
-        await payer.save();
-
-        return res.status(201).json(payer);
+        return res.status(201).json(payerType);
 
     } catch (error) {
         if (error instanceof Error) {
@@ -40,8 +27,8 @@ export const createPayerType = async (req: Request, res: Response) => {
 
 export const searchPayerType = async (req: Request, res: Response) => {
     try {
-        const payers = await Payer.find();
-        return res.json(payers);
+        const payerTypes = await PayerType.find();
+        return res.json(payerTypes);
 
     } catch (error) {
         if (error instanceof Error) {
@@ -54,12 +41,12 @@ export const updatePayerType = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
 
-        const payer = await Payer.findOneBy({ id: parseInt(id) });
+        const payerType = await PayerType.findOneBy({ id: parseInt(id) });
 
-        if (!payer) {
-            return res.status(404).json({ message: 'payer does not exists' });
+        if (!payerType) {
+            return res.status(404).json({ message: 'payerType does not exists' });
         }
-        await Payer.update({ id: parseInt(id) }, req.body);
+        await PayerType.update({ id: parseInt(id) }, req.body);
 
         return res.sendStatus(204);
 
@@ -74,13 +61,13 @@ export const getByIdPayerType = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
 
-        const payer = await Payer.findOneBy({ id: parseInt(id) });
+        const payerType = await PayerType.findOneBy({ id: parseInt(id) });
 
-        if (!payer) {
-            return res.status(404).json({ message: 'payer with given id was nor found' });
+        if (!payerType) {
+            return res.status(404).json({ message: 'payerType with given id was nor found' });
         }
         
-        return payer;
+        return payerType;
 
     } catch (error) {
         if (error instanceof Error) {
@@ -92,10 +79,10 @@ export const getByIdPayerType = async (req: Request, res: Response) => {
 export const deletePayerType = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const result = await Payer.delete({ id: parseInt(id) });
+        const result = await PayerType.delete({ id: parseInt(id) });
 
         if (result.affected === 0) {
-            return res.status(404).json({ message: 'Payer not found' });
+            return res.status(404).json({ message: 'PayerType not found' });
         }
 
         return res.sendStatus(204);
