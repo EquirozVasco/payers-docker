@@ -1,5 +1,13 @@
 version: '3'
 services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: payers
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
   app:
     build:
       context: ./app
@@ -14,15 +22,6 @@ services:
       DATABASE_PASSWORD: admin123
     depends_on:
       - payers
-
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: payers
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
