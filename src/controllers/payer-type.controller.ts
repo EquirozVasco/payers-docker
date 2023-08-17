@@ -20,8 +20,7 @@ export const createPayerType = async (req: Request, res: Response) => {
 
     } catch (error) {
         if (error instanceof Error) {
-            //return res.status(500).json({ message: error.message });
-            return error
+            return res.status(500).json({ message: error.message });
         }
     }
 }

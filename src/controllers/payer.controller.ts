@@ -8,13 +8,11 @@ export const createPayer = async (req: Request, res: Response) => {
         payer.code = req.body.code;
         payer.name = req.body.name;
         payer.email = req.body.email;
-        payer.phone = req.body.phone;
 
         if (
             !payer.code ||
             !payer.name ||
-            !payer.email ||
-            !payer.phone
+            !payer.email
         ) {
             throw new Error ('All payer fields must be filled');
         }
@@ -22,7 +20,7 @@ export const createPayer = async (req: Request, res: Response) => {
         const payerTypeId = req.body.payerTypeId;
 
         if (payerTypeId) {
-            const payerType = await PayerType.findOneBy({id: payerTypeId});
+            const payerType = await PayerType.findOne(payerTypeId);
             if (!payerType) {
                 throw new Error("Invalid payerTypeId");
             }
