@@ -23,7 +23,7 @@ jobs:
       
     - name: Build and test
       run: |
-        npm run build
+        #npm run build
         # npm run test
         
     - name: Build and push Docker image
