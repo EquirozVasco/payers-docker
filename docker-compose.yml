@@ -10,7 +10,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
   app:
     build:
-      context: ./app
+      context: .
       dockerfile: Dockerfile
     ports:
       - '3000:3000'
@@ -21,7 +21,7 @@ services:
       DATABASE_USER: postgres
       DATABASE_PASSWORD: admin123
     depends_on:
-      - payers
+      - db
 
 volumes:
   postgres_data:
