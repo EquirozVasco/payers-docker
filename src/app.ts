@@ -6,7 +6,7 @@ import payerTypeRoutes from "./routes/payer-type.route";
 
 const app = express();
 
-app.use(cors);
+app.use(cors());
 
 app.use(morgan('dev'));
 app.use(express.json());
