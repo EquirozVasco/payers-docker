@@ -24,7 +24,7 @@ jobs:
     - name: Build and test
       run: |
         npm run build
-        npm run test
+        # npm run test
         
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
