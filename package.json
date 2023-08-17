@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EquirozVasco/payers-docker.git"
+    "url": "git+https://github.com/EquirozVasco/payers-docker"
   },
   "keywords": [],
   "author": "",
@@ -30,9 +31,24 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.3",
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.15.5",
+    "@types/supertest": "^2.0.12",
+    "jest": "^29.6.2",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/",
+      "/dist/"
+    ]
   }
 }

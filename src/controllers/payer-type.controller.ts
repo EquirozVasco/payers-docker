@@ -20,7 +20,8 @@ export const createPayerType = async (req: Request, res: Response) => {
 
     } catch (error) {
         if (error instanceof Error) {
-            return res.status(500).json({ message: error.message });
+            //return res.status(500).json({ message: error.message });
+            return error
         }
     }
 }
@@ -71,7 +72,7 @@ export const getByIdPayerType = async (req: Request, res: Response) => {
 
     } catch (error) {
         if (error instanceof Error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(404).json({ message: error.message });
         }
     }
 }
@@ -89,7 +90,7 @@ export const deletePayerType = async (req: Request, res: Response) => {
 
     } catch (error) {
         if (error instanceof Error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(404).json({ message: error.message });
         }
     }
 }
