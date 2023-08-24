@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   db:
     image: postgres:13
@@ -24,4 +24,4 @@ services:
       - db
 
 volumes:
-  postgres_data:
+  postgres_data: {}
